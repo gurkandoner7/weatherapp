@@ -17,5 +17,13 @@ class WeatherRepositoryImpl @Inject constructor(
             throw e
         }
     }
+
+    override suspend fun getCityWeather(city: String): WeatherItem {
+        try {
+            return weatherService.getCityWeather(city).toWeatherItem()
+        } catch (e: Exception) {
+            throw e
+        }
+    }
 }
 

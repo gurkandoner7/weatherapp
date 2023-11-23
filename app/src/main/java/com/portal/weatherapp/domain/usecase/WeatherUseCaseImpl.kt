@@ -8,4 +8,6 @@ class WeatherUseCaseImpl @Inject constructor(private val weatherRepository: Weat
     WeatherUseCase {
     override suspend fun getCurrentWeather(lat: Double, lon: Double): WeatherItem =
         weatherRepository.getCurrentWeather(lat, lon)
+    override suspend fun getCityWeather(city: String): WeatherItem =
+        weatherRepository.getCityWeather(city)
 }

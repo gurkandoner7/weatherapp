@@ -17,15 +17,38 @@ class HomeViewModel @Inject constructor(private val weatherUseCase: WeatherUseCa
 
     private val _weatherResponse = MutableSharedFlow<WeatherItem>()
     val weatherResponse = _weatherResponse.asSharedFlow()
+
+    private val _cityResponse = MutableSharedFlow<WeatherItem>()
+    val cityResponse = _cityResponse.asSharedFlow()
+
     private val _latValue = MutableStateFlow<Double>(0.00)
     val latValue = _latValue.asStateFlow()
     private val _lonValue = MutableStateFlow<Double>(0.00)
     val lonValue = _lonValue.asStateFlow()
 
+    private val _errorFlow = MutableSharedFlow<String>()
+    val errorFlow = _errorFlow.asSharedFlow()
+
 
     fun getCurrentWeather() {
         viewModelScope.launch {
-            weatherUseCase.getCurrentWeather(_latValue.value, _lonValue.value)
+            try {
+                val weatherItem = weatherUseCase.getCurrentWeather(_latValue.value, _lonValue.value)
+                _weatherResponse.emit(weatherItem)
+            } catch (e: Exception) {
+                _errorFlow.emit("An error occurred while fetching current weather.")
+            }
+        }
+    }
+
+    fun getCityWeather(city: String) {
+        viewModelScope.launch {
+            try {
+                val weatherItem = weatherUseCase.getCityWeather(city)
+                _cityResponse.emit(weatherItem)
+            } catch (e: Exception) {
+                _errorFlow.emit("An error occurred while fetching weather for the city.")
+            }
         }
     }
 
@@ -33,4 +56,8 @@ class HomeViewModel @Inject constructor(private val weatherUseCase: WeatherUseCa
         _latValue.value = lat
         _lonValue.value = lon
     }
+
+
+
+
 }
