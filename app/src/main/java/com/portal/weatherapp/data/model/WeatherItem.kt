@@ -1,5 +1,7 @@
 package com.portal.weatherapp.data.model
 
+import com.portal.weatherapp.R
+
 data class WeatherItem(
     val coord: CoordItem,
     val weather: List<WeatherListItem>,
@@ -27,6 +29,10 @@ data class WeatherListItem(
     val description: String,
     val icon: String
 )
+
+
+
+
 
 data class MainItem(
     val temp: Double,

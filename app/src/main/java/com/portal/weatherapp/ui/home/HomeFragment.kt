@@ -10,6 +10,7 @@ import com.portal.weatherapp.compose.BaseFragment
 import com.portal.weatherapp.compose.viewBinding
 import com.portal.weatherapp.databinding.FragmentHomeBinding
 import com.portal.weatherapp.ui.home.adapter.WeatherAdapter
+import com.portal.weatherapp.utilities.helper.Util
 import com.portal.weatherapp.utilities.helper.Util.Companion.MAGIC_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,12 +36,24 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     weatherAdapter.updateItems(listOf(weatherItem.main))
                     binding.apply {
                         tvCity.setText("${weatherItem.name}, Turkey")
-                       weatherItem.weather.map {
+                        weatherItem.weather.map {
                             tvDesc.setText(it.description)
                         }
-                           tvSunriseValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunrise))
-                           tvSunsetValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunset))
-                           tvCelcius.setText(getString(R.string.celcius).replace(MAGIC_KEY, weatherItem.main.temp.toString()) )
+                        tvSunriseValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunrise))
+                        tvSunsetValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunset))
+                        tvCelcius.setText(
+                            getString(R.string.celcius).replace(
+                                MAGIC_KEY, weatherItem.main.temp.toString()
+                            )
+                        )
+                        weatherItem.weather.map { mainItem ->
+                            ivWeatherIcon.setImageResource(
+                                Util.WeatherIcon.values()
+                                    .find { util -> util.icon == mainItem.main }?.resource
+                                    ?: R.drawable.ic_clouds
+                            )
+                        }
+
                     }
 
                 }
@@ -78,9 +91,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
                 }
         */
-        homeViewModel.getCityWeather("Adana")
+        homeViewModel.getCityWeather("Kadıköy")
 
-
+        binding.btnRefresh.setOnClickListener {
+            homeViewModel.getCityWeather("Ordu")
+        }
     }
 
     private fun gridLayoutSize() {
@@ -124,5 +139,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun convertUnixTimeToUTC(unixTime: Long): String {
         val turkeyFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         turkeyFormat.timeZone = TimeZone.getTimeZone("Europe/Istanbul")
-        return turkeyFormat.format( Date(unixTime * 1000L))
-    }}
+        return turkeyFormat.format(Date(unixTime * 1000L))
+    }
+}
