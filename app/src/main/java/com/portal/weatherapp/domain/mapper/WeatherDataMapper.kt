@@ -61,7 +61,9 @@ private fun MainResponseItem.toMainItem(): MainItem {
         temp_min = temp_min,
         temp_max = temp_max,
         pressure = pressure,
-        humidity = humidity
+        humidity = humidity,
+        sea_level = sea_level,
+        grnd_level = grnd_level
     )
 }
 
@@ -83,7 +85,15 @@ fun MainItem.toWeatherData(): List<WeatherData> {
         },
         pressure.let {
             weatherDataList.add(WeatherData("Pressure", R.drawable.ic_barometer, "$it hPa"))
-        }
+        },
+        sea_level.let {
+            weatherDataList.add(WeatherData("Sea Level", R.drawable.ic_sea_level, "$it m"))
+        },
+        grnd_level.let {
+            weatherDataList.add(WeatherData("Ground Level", R.drawable.ic_ground, "$it m"))
+        },
+
+
     )
 
     return weatherDataList

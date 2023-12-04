@@ -88,9 +88,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (position) {
-                    in 0..2 -> 2 // İlk 4 öğe, 1. satırda 1'er genişlikte
-                    3, 4 -> 3 // Sonraki 2 öğe, 2. satırda 2'şer genişlikte
-                    else -> 4 // Son öğe, 3. satırda 4 genişlikte
+                    in 0..2 -> 2
+                    3, 4 -> 3
+                    else -> 3
                 }
             }
         }
@@ -120,11 +120,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         return filteredCityList
     }
 
-    fun convertUnixTimeToUTC(unixTime: Long): String {
-        val utcFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        utcFormat.timeZone = TimeZone.getTimeZone("UTC")
 
-        val date = Date(unixTime * 1000L)
-        return utcFormat.format(date)
-    }
-}
+    private fun convertUnixTimeToUTC(unixTime: Long): String {
+        val turkeyFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        turkeyFormat.timeZone = TimeZone.getTimeZone("Europe/Istanbul")
+        return turkeyFormat.format( Date(unixTime * 1000L))
+    }}

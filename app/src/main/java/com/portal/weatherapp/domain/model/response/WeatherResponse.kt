@@ -35,6 +35,8 @@ data class MainResponseItem(
     val feels_like: Double,
     val temp_min: Double,
     val temp_max: Double,
+    val sea_level: Int,
+    val grnd_level: Int,
     val pressure: Int,
     val humidity: Int
 ) : Serializable
