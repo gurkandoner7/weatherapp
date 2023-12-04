@@ -1,5 +1,6 @@
 package com.portal.weatherapp.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -14,8 +15,6 @@ import com.portal.weatherapp.utilities.helper.Util
 import com.portal.weatherapp.utilities.helper.Util.Companion.MAGIC_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -31,22 +30,32 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun observeVariables() {
         lifecycleScope.launchWhenStarted {
+
             launch {
                 homeViewModel.cityResponse.collect { weatherItem ->
-                    weatherAdapter.updateItems(listOf(weatherItem.main))
+                    weatherAdapter.updateItems(listOf(weatherItem?.main))
                     binding.apply {
-                        tvCity.setText("${weatherItem.name}, Turkey")
-                        weatherItem.weather.map {
+                        tvCity.setText("${weatherItem?.name}, Turkey")
+                        weatherItem?.weather?.map {
                             tvDesc.setText(it.description)
                         }
-                        tvSunriseValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunrise))
-                        tvSunsetValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunset))
+                        tvSunriseValue.setText(weatherItem?.sys?.sunrise?.let {
+                            convertUnixTimeToUTC(
+                                it
+                            )
+                        })
+                        tvSunsetValue.setText(weatherItem?.sys?.sunset?.let {
+                            convertUnixTimeToUTC(
+                                it
+                            )
+                        })
                         tvCelcius.setText(
                             getString(R.string.celcius).replace(
-                                MAGIC_KEY, weatherItem.main.temp.toString()
+                                MAGIC_KEY, weatherItem
+                                    ?.main?.temp.toString()
                             )
                         )
-                        weatherItem.weather.map { mainItem ->
+                        weatherItem?.weather?.map { mainItem ->
                             ivWeatherIcon.setImageResource(
                                 Util.WeatherIcon.values()
                                     .find { util -> util.icon == mainItem.main }?.resource
@@ -62,13 +71,19 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     override fun initUI(savedInstanceState: Bundle?) {
+
         weatherAdapter = WeatherAdapter(requireContext())
         binding.rvWeather.adapter = weatherAdapter
         gridLayoutSize()
 
-        homeViewModel.getCityWeather("Kadıköy")
+        val sharedPreferences =
+            requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val cityName = sharedPreferences.getString("selectedCity", "İstanbul")
+        cityName?.let { cityNameItem ->
+            homeViewModel.getCityWeather(cityNameItem)
+        }
         binding.btnRefresh.setOnClickListener {
-            homeViewModel.getCityWeather("Ordu")
+            homeViewModel.getCityWeather(homeViewModel.cityValue.value)
         }
     }
 
@@ -87,7 +102,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         binding.rvWeather.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
 
     }
-
 
 
     private fun convertUnixTimeToUTC(unixTime: Long): String {

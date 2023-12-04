@@ -9,13 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="com.portal.weatherapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_location"
+            app:destination="@id/navigation_location" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_location"
         android:name="com.portal.weatherapp.ui.location.LocationFragment"
         android:label="@string/locations"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_navigation_location_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

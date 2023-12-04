@@ -10,4 +10,6 @@ interface LocationDbUseCase {
     suspend fun addLocationList(locationEntity: List<LocationEntity>)
 
     suspend fun deleteAllLocations()
+
+    suspend fun deleteItem(cityName: String)
 }

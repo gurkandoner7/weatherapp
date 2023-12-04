@@ -20,10 +20,10 @@ class WeatherAdapter(
         notifyItemRangeInserted(items.size - weatherDataList.size, weatherDataList.size)
     }
 
-    fun updateItems(newItems: List<MainItem>) {
+    fun updateItems(newItems: List<MainItem?>) {
         items.clear()
         newItems.forEach { newItem ->
-            items.addAll(newItem.toWeatherData())
+            newItem?.let { items.addAll(it.toWeatherData()) }
         }
         notifyDataSetChanged()
     }

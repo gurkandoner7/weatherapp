@@ -13,6 +13,8 @@ class LocationRepository @Inject internal constructor(
 
     fun addLocation(locationEntity: LocationEntity) = locationDao.addLocation(locationEntity)
 
+    fun deleteLocation(cityName: String) = locationDao.deleteLocation(cityName)
+
     fun deleteAllLocations() = locationDao.deleteAllLocations()
 
     fun addLocationList(locationEntity: List<LocationEntity>) =

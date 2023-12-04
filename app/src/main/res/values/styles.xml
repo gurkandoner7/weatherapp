@@ -220,12 +220,20 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <style name="DeportakChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:checkable">true</item>
-        <item name="chipStrokeColor">@color/marine_blue_30</item>
-        <item name="chipStrokeWidth">@dimen/dimen_1dp</item>
-        <item name="chipCornerRadius">@dimen/dimen_10dp</item>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#3C023C</item>
+        <item name="android:dialogCornerRadius">@dimen/dimen_8dp</item>
+        <item name="elevation">@dimen/dimen_4dp</item>
     </style>
+
+    <style name="AddLocation">
+        <item name="android:drawableEnd">@drawable/ic_add_location</item>
+        <item name="android:radius">@dimen/dimen_8dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="backgroundColor">@color/bgEndColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
     <style name="CheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:background">@null</item>

@@ -8,4 +8,11 @@
     <string name="celcius">%!%°C</string>
     <string name="locations">Locations</string>
     <string name="search_location">Search Location</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="warning">Warning!</string>
+    <string name="cancel">Cancel</string>
+    <string name="approve">Approve</string>
+    <string name="dialog_question">Are you sure you want to remove this location from your locations list?</string>
+    <string name="add_location">ADD LOCATION</string>
 </resources>
