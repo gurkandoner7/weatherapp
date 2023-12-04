@@ -76,5 +76,6 @@
     <color name="warehouse_code_field">#DFF2F8</color>
     <color name="bgStartColor">#B800B8</color>
     <color name="bgEndColor">#2D264B</color>
+    <color name="searchcolor">#9F9D9D</color>
 
 </resources>

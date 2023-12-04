@@ -9,15 +9,19 @@
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/etAutoComplete"
+        style="@style/AutoCompleteTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:drawableEnd="@drawable/ic_search"
+        android:layout_marginTop="@dimen/dimen_36dp"
+        android:hint="@string/search_location"
+        android:popupTheme="@style/PopupMenuStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
@@ -44,5 +48,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnDelete" />
+-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,7 +63,7 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
                 }
             })
 
-            btnAdd.setOnClickListener {
+      /*      btnAdd.setOnClickListener {
                 locationViewModel.addLocation(etAutoComplete.text.toString())
             }
 
@@ -74,7 +74,7 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
             btnGetLocations.setOnClickListener {
                 locationViewModel.getLocations()
             }
-
+*/
         }
 
 
