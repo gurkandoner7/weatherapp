@@ -4,44 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_homepage"
     tools:context=".ui.home.HomeFragment">
+    <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_48dp"
+        android:textSize="@dimen/ts_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Istanbul, Turkey" />
 
-    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivWeatherIcon"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:background="@drawable/ic_clouds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCity" />
+
+    <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:textSize="@dimen/ts_20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivWeatherIcon"
+        tools:text="Clear Sky" />
+
+    <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+        android:id="@+id/tvCelcius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ts_50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDesc"
+        tools:text="32°C" />
+
+    <AutoCompleteTextView
         android:id="@+id/etAutoComplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvLat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSunset"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_marginHorizontal="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_28dp"
+        android:background="@drawable/bg_cards"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAutoComplete" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCelcius">
 
-    <TextView
-        android:id="@+id/tvLon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLat" />
 
-    <Button
-        android:id="@+id/btnCalculate"
-        android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSunrise"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginStart="@dimen/dimen_40dp"
+            android:src="@drawable/ic_sunrise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/clSunset"
+            app:layout_constraintTop_toTopOf="@id/clSunset" />
+
+        <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+            android:id="@+id/tvSunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:text="@string/sunrise"
+            android:textSize="@dimen/ts_14sp"
+            app:layout_constraintStart_toEndOf="@id/ivSunrise"
+            app:layout_constraintTop_toTopOf="@+id/ivSunrise"
+            app:textType="Semibold" />
+
+        <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+            android:id="@+id/tvSunriseValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/ivSunrise"
+            app:layout_constraintEnd_toEndOf="@+id/tvSunrise"
+            android:textSize="@dimen/ts_14sp"
+            app:layout_constraintStart_toStartOf="@+id/tvSunrise"
+            tools:text="22:23" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSunset"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginEnd="@dimen/dimen_40dp"
+            android:src="@drawable/ic_sunset"
+            app:layout_constraintBottom_toBottomOf="@id/clSunset"
+            app:layout_constraintEnd_toEndOf="@id/clSunset"
+            app:layout_constraintTop_toTopOf="@id/clSunset" />
+
+        <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+            android:id="@+id/tvSunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:text="@string/sunset"
+            android:textSize="@dimen/ts_14sp"
+            app:layout_constraintEnd_toStartOf="@id/ivSunset"
+            app:layout_constraintTop_toTopOf="@id/ivSunset"
+            app:textType="Semibold" />
+
+        <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+            android:id="@+id/tvSunsetValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/ivSunset"
+            android:textSize="@dimen/ts_14sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvSunset"
+            app:layout_constraintStart_toStartOf="@+id/tvSunset"
+            tools:text="22:23" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWeather"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:text="hesapla"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="@dimen/dimen_36dp"
+        android:background="@drawable/bg_cards"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="@+id/clSunset"
+        app:layout_constraintStart_toStartOf="@+id/clSunset"
+        app:layout_constraintTop_toBottomOf="@id/clSunset"
+        app:spanCount="3"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_weather_card_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

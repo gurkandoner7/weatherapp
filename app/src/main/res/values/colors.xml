@@ -7,4 +7,74 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="navyBlue">#002e6d</color>
+    <color name="darkish_blue">#003986</color>
+    <color name="darkish_blue_two">#003f96</color>
+    <color name="marine_blue">#002558</color>
+    <color name="marine_blue_10">#1A002558</color>
+    <color name="marine_blue_20">#33002e6d</color>
+    <color name="marine_blue_30">#4d002e6d</color>
+    <color name="marine_blue_40">#66002e6d</color>
+    <color name="marine_blue_50">#80002e6d</color>
+    <color name="marine_blue_70">#66002e6d</color>
+    <color name="dark_sky_blue">#4ac6e2</color>
+    <color name="light_sky_blue">#dff2f8</color>
+    <color name="egg_blue_50">#80dff2F8</color>
+    <color name="duck_egg_blue">#bfe5f2</color>
+    <color name="blue_grey">#99abc5</color>
+    <color name="scarlet">#b00020</color>
+    <color name="deep_rose">#c4495f</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_60_6">#0f000000</color>
+    <color name="black_60_10">#1a000000</color>
+    <color name="black_60_12">#1f000000</color>
+    <color name="black_60_16">#29000000</color>
+    <color name="red_soft">#FB3C49</color>
+    <color name="notification_title">#272322</color>
+    <color name="red">#D6003C</color>
+    <color name="disabled">#BAC9E1</color>
+    <color name="menu_profile_email">#6682a7</color>
+
+
+    <color name="calendar_day_disabled_font">#4AC6E2</color>
+    <color name="calendar_day_weekend_font">#4AC6E2</color>
+    <color name="calendar_picker_bg">#00FFFFFF</color>
+    <color name="calendar_day_unselected_bg">#00000000</color>
+    <color name="calendar_day_selected_bg">#4AC6E2</color>
+    <color name="calendar_day_range_selected_bg">#804AC6E2</color>
+    <color name="calendar_day_selected_font">#FFFFFF</color>
+    <color name="calendar_day_normal_font">#002E6D</color>
+
+    <color name="calendar_month_font">#000000</color>
+    <color name="calendar_week_font">#4AC6E2</color>
+
+    <color name="colorPrimary">#002E6D</color>
+    <color name="colorPrimary20">#33002E6D</color>
+    <color name="colorPrimaryVeryDark">#FF00132D</color>
+    <color name="textColorOppositePrimary">#FFFFFF</color>
+    <color name="colorSecondary">#FFD100</color>
+    <color name="nav_selected">#0E2E69</color>
+    <color name="nav_unselected">#80000000</color>
+    <color name="light_grey">#9B9B9B</color>
+    <color name="proceed_button_color">#BF002E6D</color>
+
+    <color name="login_forget_password_color">#BFBFBF</color>
+    <color name="login_sign_up_text_color">#002E6D</color>
+    <color name="transparent_background">#33171717</color>
+    <color name="dark_transparent_background">#454545</color>
+
+    <color name="pop_up_success">#A7D19F</color>
+    <color name="pop_up_fail">#FF0000</color>
+    <color name="pop_up_text">#002E6D</color>
+    <color name="pop_up_text2">#002E6D</color>
+    <color name="shadow">#29000000</color>
+    <color name="default_box_stroke_color">#727272</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="feature_detail_unselected">#acabab</color>
+    <color name="warehouse_code_field">#DFF2F8</color>
+    <color name="bgStartColor">#B800B8</color>
+    <color name="bgEndColor">#2D264B</color>
+
 </resources>

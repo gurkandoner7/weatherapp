@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WeatherCustomTextView">
+        <attr name="textType" format="integer">
+            <flag name="Regular" value="0" />
+            <flag name="Bold" value="1" />
+            <flag name="Medium" value="2" />
+            <flag name="Regular_underlined" value="3" />
+            <flag name="Medium_underlined" value="4" />
+            <flag name="Bold_underlined" value="5" />
+            <flag name="Semibold" value="6" />
+            <flag name="Semibold_underlined" value="7" />
+        </attr>
+        <attr name="android:text" format="string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:textSize" format="dimension" />
+        <attr name="android:maxLines" format="integer" />
+        <attr name="android:ellipsize" format="integer">
+            <flag name="none" value="0" />
+            <flag name="start" value="1" />
+            <flag name="middle" value="2" />
+            <flag name="end" value="3" />
+            <flag name="marquee" value="4" />
+        </attr>
+        <attr name="textAlignment" format="integer">
+            <flag name="left" value="0" />
+            <flag name="right" value="1" />
+            <flag name="justify" value="2" />
+            <flag name="center" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="WeatherEditTextView">
+        <attr name="android:id" format="reference" />
+        <attr name="hintText" format="string" />
+        <attr name="android:hint" format="string" />
+        <attr name="endHintText" format="string" />
+        <attr name="android:enabled" format="boolean" />
+        <attr name="editTextLayoutHeight" format="dimension" />
+        <attr name="hintTextViewVisible" format="boolean" />
+        <attr name="subTextViewVisible" format="boolean" />
+        <attr name="maxLines" format="integer" />
+        <attr name="fieldType" format="integer">
+            <flag name="email" value="0" />
+            <flag name="text" value="1" />
+            <flag name="number" value="2" />
+            <flag name="date" value="3" />
+            <flag name="multilineText" value="4" />
+            <flag name="price" value="5" />
+            <flag name="weight" value="6"/>
+            <flag name="measure" value="7"/>
+            <flag name="userinfo" value="8" />
+        </attr>
+        <attr name="android:lines" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="WeatherContinueButton">
+        <attr name="android:text" format="string" />
+        <attr name="setOutlinedButtonStyle" format="boolean" />
+        <attr name="setCancelButtonStyle" format="boolean" />
+        <attr name="android:textSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

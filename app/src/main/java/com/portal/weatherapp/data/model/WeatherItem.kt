@@ -53,3 +53,16 @@ data class SysItem(
     val sunrise: Long,
     val sunset: Long
 )
+
+
+data class AdapterItemList(
+    val header: String,
+    val desc: String,
+    val icon: Int,
+)
+
+data class WeatherData(
+    val header: String,
+    val icon: Int,
+    val desc: String
+)

@@ -37,13 +37,18 @@ class NetworkModule {
         loggingInterceptor: HttpLoggingInterceptor,
         application: Application,
     ): OkHttpClient {
-        return OkHttpClient.Builder().connectTimeout(45L, TimeUnit.SECONDS)
-            .writeTimeout(45L, TimeUnit.SECONDS).readTimeout(45L, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor).addInterceptor(
+        return OkHttpClient.Builder()
+            .connectTimeout(45L, TimeUnit.SECONDS)
+            .writeTimeout(45L, TimeUnit.SECONDS)
+            .readTimeout(45L, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(
                 ChuckerInterceptor.Builder(application.applicationContext)
                     .collector(ChuckerCollector(application.applicationContext))
-                    .maxContentLength(250000L).redactHeaders(emptySet())
-                    .alwaysReadResponseBody(false).build()
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
             ).addNetworkInterceptor(Interceptor { chain ->
                 val original: Request = chain.request()
                 val removeHeader = original.headers["removeHeader"]
@@ -53,7 +58,8 @@ class NetworkModule {
                     requestBuilder.header("Content-Type", "application/json; charset=utf-8")
                 }
                 chain.proceed(requestBuilder.build())
-            }).build()
+            })
+            .build()
     }
 
     @Provides

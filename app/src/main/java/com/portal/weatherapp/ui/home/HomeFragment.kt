@@ -1,65 +1,101 @@
 package com.portal.weatherapp.ui.home
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.ArrayAdapter
+import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.portal.weatherapp.R
 import com.portal.weatherapp.compose.BaseFragment
 import com.portal.weatherapp.compose.viewBinding
 import com.portal.weatherapp.databinding.FragmentHomeBinding
+import com.portal.weatherapp.ui.home.adapter.WeatherAdapter
+import com.portal.weatherapp.utilities.helper.Util.Companion.MAGIC_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
+    private lateinit var weatherAdapter: WeatherAdapter
+
 
     override fun observeVariables() {
         lifecycleScope.launchWhenStarted {
             launch {
-                homeViewModel.cityResponse.collect{
-                    binding.tvLat.text = it.coord.lat.toString()
-                    binding.tvLon.text = it.coord.lon.toString()
+                homeViewModel.cityResponse.collect { weatherItem ->
+                    weatherAdapter.updateItems(listOf(weatherItem.main))
+                    binding.apply {
+                        tvCity.setText("${weatherItem.name}, Turkey")
+                       weatherItem.weather.map {
+                            tvDesc.setText(it.description)
+                        }
+                           tvSunriseValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunrise))
+                           tvSunsetValue.setText(convertUnixTimeToUTC(weatherItem.sys.sunset))
+                           tvCelcius.setText(getString(R.string.celcius).replace(MAGIC_KEY, weatherItem.main.temp.toString()) )
+                    }
+
                 }
             }
         }
     }
 
     override fun initUI(savedInstanceState: Bundle?) {
-        binding.apply {
-            etAutoComplete.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
+        weatherAdapter = WeatherAdapter(requireContext())
+        binding.rvWeather.adapter = weatherAdapter
+        gridLayoutSize()
+        /*
+                binding.apply {
+                    etAutoComplete.addTextChangedListener(object : TextWatcher {
+                        override fun beforeTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            count: Int,
+                            after: Int
+                        ) {
+                        }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val adapter = ArrayAdapter(
-                        requireContext(),
-                        android.R.layout.simple_dropdown_item_1line,
-                        getFilteredCityList(s.toString().toLowerCase(Locale.getDefault()))
-                    )
-                    etAutoComplete.setAdapter(adapter)
-                }
+                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                            val adapter = ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_dropdown_item_1line,
+                                getFilteredCityList(s.toString().toLowerCase(Locale.getDefault()))
+                            )
+                            etAutoComplete.setAdapter(adapter)
+                        }
 
-                override fun afterTextChanged(s: Editable?) {
+                        override fun afterTextChanged(s: Editable?) {
+                        }
+                    })
+
                 }
-            })
-            btnCalculate.setOnClickListener {
-            homeViewModel.getCityWeather(etAutoComplete.text.toString())
+        */
+        homeViewModel.getCityWeather("Adana")
+
+
+    }
+
+    private fun gridLayoutSize() {
+        val layoutManager = GridLayoutManager(context, 6)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (position) {
+                    in 0..2 -> 2 // İlk 4 öğe, 1. satırda 1'er genişlikte
+                    3, 4 -> 3 // Sonraki 2 öğe, 2. satırda 2'şer genişlikte
+                    else -> 4 // Son öğe, 3. satırda 4 genişlikte
+                }
             }
         }
+        binding.rvWeather.layoutManager = layoutManager
+        binding.rvWeather.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
 
     }
 
@@ -82,5 +118,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
 
         return filteredCityList
+    }
+
+    fun convertUnixTimeToUTC(unixTime: Long): String {
+        val utcFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        utcFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+        val date = Date(unixTime * 1000L)
+        return utcFormat.format(date)
     }
 }
