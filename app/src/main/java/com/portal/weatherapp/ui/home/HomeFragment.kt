@@ -65,34 +65,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         weatherAdapter = WeatherAdapter(requireContext())
         binding.rvWeather.adapter = weatherAdapter
         gridLayoutSize()
-        /*
-                binding.apply {
-                    etAutoComplete.addTextChangedListener(object : TextWatcher {
-                        override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                        ) {
-                        }
 
-                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                            val adapter = ArrayAdapter(
-                                requireContext(),
-                                android.R.layout.simple_dropdown_item_1line,
-                                getFilteredCityList(s.toString().toLowerCase(Locale.getDefault()))
-                            )
-                            etAutoComplete.setAdapter(adapter)
-                        }
-
-                        override fun afterTextChanged(s: Editable?) {
-                        }
-                    })
-
-                }
-        */
         homeViewModel.getCityWeather("Kadıköy")
-
         binding.btnRefresh.setOnClickListener {
             homeViewModel.getCityWeather("Ordu")
         }
@@ -114,26 +88,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     }
 
-    private fun getFilteredCityList(searchText: String): List<String> {
-        val filteredCityList = mutableListOf<String>()
-
-        try {
-            val inputStream = resources.openRawResource(R.raw.tr)
-            val jsonContent = inputStream.bufferedReader().use { it.readText() }
-            val jsonArray = JSONArray(jsonContent)
-
-            for (i in 0 until jsonArray.length()) {
-                val cityName = jsonArray.getJSONObject(i).getString("city")
-                if (cityName.toLowerCase(Locale.getDefault()).contains(searchText)) {
-                    filteredCityList.add(cityName)
-                }
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-
-        return filteredCityList
-    }
 
 
     private fun convertUnixTimeToUTC(unixTime: Long): String {
