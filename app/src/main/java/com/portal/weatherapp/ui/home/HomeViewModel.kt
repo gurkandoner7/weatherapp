@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.portal.weatherapp.data.model.WeatherItem
 import com.portal.weatherapp.domain.usecase.LocationDbUseCase
 import com.portal.weatherapp.domain.usecase.WeatherUseCase
-import com.portal.weatherapp.repository.db.location.LocationEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -20,11 +18,10 @@ class HomeViewModel @Inject constructor(
     private val weatherUseCase: WeatherUseCase,
     private val locationDbUseCase: LocationDbUseCase
 ) : ViewModel() {
-
     private val _cityResponse = MutableStateFlow<WeatherItem?>(null)
     val cityResponse = _cityResponse.asStateFlow()
 
-    private val _cityValue = MutableStateFlow<String>("İstanbul")
+    private val _cityValue = MutableStateFlow<String>("")
     val cityValue = _cityValue.asStateFlow()
 
     private val _latValue = MutableStateFlow<Double>(0.00)
@@ -34,6 +31,7 @@ class HomeViewModel @Inject constructor(
 
     private val _errorFlow = MutableSharedFlow<String>()
     val errorFlow = _errorFlow.asSharedFlow()
+
 
     fun getCityWeather(city: String) {
         viewModelScope.launch {
@@ -45,16 +43,29 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getCoordResponse(lat: Double,lon: Double) {
+        viewModelScope.launch {
+            try {
+                _cityResponse.emit(
+                    weatherUseCase.getCurrentWeather(
+                        lat,
+                        lon
+                    )
+                )
+            } catch (e: Exception) {
+                _errorFlow.emit("An error occurred while fetching weather for the city.")
+            }
+        }
+    }
+
     fun setLatAndLon(lat: Double, lon: Double) {
         _latValue.value = lat
         _lonValue.value = lon
     }
 
-    fun updateLastCityValue(city: String){
+    fun updateLastCityValue(city: String) {
         _cityValue.value = city
     }
-
-
 
 
 }

@@ -15,4 +15,5 @@
     <string name="approve">Approve</string>
     <string name="dialog_question">Are you sure you want to remove this location from your locations list?</string>
     <string name="add_location">ADD LOCATION</string>
+    <string name="search_nearby">Search\nNearby</string>
 </resources>

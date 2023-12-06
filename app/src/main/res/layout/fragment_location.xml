@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_36dp"
-        android:drawableEnd="@drawable/ic_search"
         android:layout_marginTop="@dimen/dimen_36dp"
+        android:drawableEnd="@drawable/ic_search"
         android:hint="@string/search_location"
         android:popupTheme="@style/PopupMenuStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,51 +34,41 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLocation"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/dimen_20dp"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:itemCount="8"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
         android:layout_marginTop="@dimen/dimen_8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnAdd"
-        tools:listitem="@layout/item_location"
-        />
+        tools:itemCount="8"
+        tools:listitem="@layout/item_location" />
 
-
-    <Button
+    <LinearLayout
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_8dp"
-        android:text="@string/add_location"
-        android:textColor="@color/white"
-        android:drawableEnd="@drawable/ic_add_location"
-        android:background="@drawable/bg_cards"
-        android:textAlignment="textStart"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etAutoComplete" />
-<!--
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Locations"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAdd" />
+        app:layout_constraintEnd_toEndOf="@id/etAutoComplete"
+        app:layout_constraintStart_toStartOf="@id/etAutoComplete"
+        app:layout_constraintTop_toBottomOf="@id/etAutoComplete">
 
-    <Button
-        android:id="@+id/btnGetLocations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get All Locations"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnDelete" />
--->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:src="@drawable/ic_add_location"
+            android:background="@null" />
+
+        <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_location"
+            android:layout_gravity="center"
+            app:textType="Semibold" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

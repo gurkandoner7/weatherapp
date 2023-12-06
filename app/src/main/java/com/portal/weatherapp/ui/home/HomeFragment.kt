@@ -1,11 +1,15 @@
 package com.portal.weatherapp.ui.home
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.portal.weatherapp.R
 import com.portal.weatherapp.compose.BaseFragment
 import com.portal.weatherapp.compose.viewBinding
@@ -26,6 +30,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
     private lateinit var weatherAdapter: WeatherAdapter
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+
 
 
     override fun observeVariables() {
@@ -35,7 +42,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 homeViewModel.cityResponse.collect { weatherItem ->
                     weatherAdapter.updateItems(listOf(weatherItem?.main))
                     binding.apply {
-                        tvCity.setText("${weatherItem?.name}, Turkey")
+                        tvCity.setText("${weatherItem?.name}, ${weatherItem?.sys?.country}")
                         weatherItem?.weather?.map {
                             tvDesc.setText(it.description)
                         }
@@ -75,6 +82,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         weatherAdapter = WeatherAdapter(requireContext())
         binding.rvWeather.adapter = weatherAdapter
         gridLayoutSize()
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val sharedPreferences =
             requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -82,8 +91,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         cityName?.let { cityNameItem ->
             homeViewModel.getCityWeather(cityNameItem)
         }
-        binding.btnRefresh.setOnClickListener {
-            homeViewModel.getCityWeather(homeViewModel.cityValue.value)
+           binding.llSearchNearby.setOnClickListener {
+            fetchLocation()
         }
     }
 
@@ -103,6 +112,29 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     }
 
+    private fun fetchLocation() {
+        val task = fusedLocationProviderClient.lastLocation
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                101
+            )
+            return
+        }
+        task.addOnSuccessListener {
+            if (it != null) {
+                homeViewModel.getCoordResponse(it.latitude,it.longitude)
+            }
+        }
+    }
 
     private fun convertUnixTimeToUTC(unixTime: Long): String {
         val turkeyFormat = SimpleDateFormat("HH:mm", Locale.getDefault())

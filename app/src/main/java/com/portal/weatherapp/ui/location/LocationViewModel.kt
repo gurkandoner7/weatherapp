@@ -1,7 +1,9 @@
 package com.portal.weatherapp.ui.location
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.lifecycle.ViewModel
-
 import androidx.lifecycle.viewModelScope
 import com.portal.weatherapp.data.model.WeatherItem
 import com.portal.weatherapp.domain.usecase.LocationDbUseCase
@@ -16,12 +18,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class LocationViewModel @Inject constructor(
     private val locationDbUseCase: LocationDbUseCase,
     private val weatherUseCase: WeatherUseCase
 ) :
     ViewModel() {
+    private var location: Location? = null
 
     private val _getAllLocations = MutableStateFlow<List<LocationEntity>>(emptyList())
     val getAllLocations = _getAllLocations.asStateFlow()
@@ -37,6 +41,7 @@ class LocationViewModel @Inject constructor(
 
     private val _errorFlow = MutableSharedFlow<String>()
     val errorFlow = _errorFlow.asSharedFlow()
+
 
     fun getCoord(cityName: String) {
         viewModelScope.launch {
@@ -80,4 +85,6 @@ class LocationViewModel @Inject constructor(
             locationDbUseCase.deleteItem(cityName)
         }
     }
+
+
 }

@@ -49,76 +49,7 @@ fun Context.showKeyboard(view: View) {
     inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_FORCED)
 }
 
-fun View.showView(visible: Boolean) {
-    when (visible) {
-        true -> this.visibility = View.VISIBLE
-        false -> this.visibility = View.GONE
-    }
-}
 
-fun TextView.setChangedFontSpan(message: String, willChangeWord: String, font: Typeface) {
-    val spannableText = SpannableString(message)
-    val start = message.indexOf(willChangeWord)
-    val end = message.indexOf(willChangeWord) + willChangeWord.length
-
-    try {
-        spannableText.setSpan(
-            CustomTypefaceSpan(font),
-            start,
-            end,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        text = spannableText
-    } catch (e: java.lang.IndexOutOfBoundsException) {
-        println("$willChangeWord was not found in TextView text")
-    }
-}
-
-fun TextView.setChangedFontSpan(message: String, willChangeWords: Array<String>, font: Typeface) {
-    val spannableText = SpannableString(message)
-
-    willChangeWords.forEach { word ->
-        val start = message.indexOf(word)
-        val end = message.indexOf(word) + word.length
-
-        try {
-            spannableText.setSpan(
-                CustomTypefaceSpan(font),
-                start,
-                end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-
-        } catch (e: java.lang.IndexOutOfBoundsException) {
-            println("$word was not found in TextView text")
-        }
-    }
-
-    text = spannableText
-}
-
-fun TextView.setChangedFontSpan(message: String, vararg willChangeWords: Pair<String, Typeface>) {
-    val spannableText = SpannableString(message)
-
-    willChangeWords.forEach { (word, font) ->
-        val start = message.indexOf(word)
-        val end = message.indexOf(word) + word.length
-
-        try {
-            spannableText.setSpan(
-                CustomTypefaceSpan(font),
-                start,
-                end,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-
-        } catch (e: java.lang.IndexOutOfBoundsException) {
-            println("$word was not found in TextView text")
-        }
-    }
-
-    text = spannableText
-}
 
 @RequiresApi(Build.VERSION_CODES.Q)
 fun TextView.withClickableSpan(
