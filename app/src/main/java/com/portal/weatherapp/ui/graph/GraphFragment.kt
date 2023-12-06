@@ -3,6 +3,7 @@ package com.portal.weatherapp.ui.graph
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
@@ -11,6 +12,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.firebase.auth.FirebaseAuth
+import com.portal.Graphapp.ui.graph.adapter.GraphAdapter
 import com.portal.weatherapp.R
 import com.portal.weatherapp.compose.BaseFragment
 import com.portal.weatherapp.compose.viewBinding
@@ -19,6 +21,7 @@ import com.portal.weatherapp.utilities.extensions.configureLineDataSet
 import com.portal.weatherapp.utilities.extensions.configureXAxis
 import com.portal.weatherapp.utilities.extensions.configureYAxis
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -28,12 +31,21 @@ class GraphFragment : BaseFragment(R.layout.fragment_graph) {
 
     private val graphViewModel: GraphViewModel by activityViewModels()
     private val binding: FragmentGraphBinding by viewBinding(FragmentGraphBinding::bind)
+    private lateinit var adapter: GraphAdapter
 
     override fun observeVariables() {
-
+        lifecycleScope.launchWhenStarted {
+            launch {
+                graphViewModel.graphList.collect {
+                    adapter.updateItems(it)
+                }
+            }
+        }
     }
 
     override fun initUI(savedInstanceState: Bundle?) {
+        adapter = GraphAdapter(requireContext())
+        binding.rvHourly.adapter = adapter
         setupLineChart()
         setLineChartData()
         binding.btnSignOut.setButtonOnClick {
@@ -101,7 +113,7 @@ class GraphFragment : BaseFragment(R.layout.fragment_graph) {
                 add(dateFormat.format(calendar.time))
             }
         }
-
+        binding.tvSelectedDay.setText(daysOfWeek.first())
         binding.lineChart.apply {
             data = LineData(dataSet)
             invalidate()

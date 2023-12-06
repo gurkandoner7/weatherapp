@@ -30,14 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
-        android:id="@+id/tvSelectedDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/ts_14sp"
-        app:layout_constraintBottom_toTopOf="@id/btnSignOut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <com.portal.weatherapp.utilities.customviews.WeatherContinueButton
         android:id="@+id/btnSignOut"
@@ -51,8 +43,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHourly"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_28dp"
+        android:paddingTop="@dimen/dimen_16dp"
+        android:background="@drawable/bg_cards"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/btnSignOut"
@@ -60,7 +55,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lineChart"
         tools:itemCount="24"
-        tools:listitem="@layout/item_weather_card_view" />
+        tools:listitem="@layout/item_graph_card_view" />
+    <com.portal.weatherapp.utilities.customviews.WeatherCustomTextView
+        android:id="@+id/tvSelectedDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ts_14sp"
+        tools:text="Thursday"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        app:textType="Semibold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/rvHourly"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
