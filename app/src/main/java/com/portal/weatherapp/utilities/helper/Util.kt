@@ -5,6 +5,8 @@ import com.portal.weatherapp.R
 class Util {
     companion object {
         const val MAGIC_KEY = "%!%"
+        const val GOOGLE_AUTH_KEY =
+            "945721442055-biup34j8nrjml243kipsio9t0s17ulsc.apps.googleusercontent.com"
     }
 
     enum class WeatherIcon(val icon: String, val resource: Int) {

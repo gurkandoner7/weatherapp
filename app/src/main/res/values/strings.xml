@@ -16,4 +16,14 @@
     <string name="dialog_question">Are you sure you want to remove this location from your locations list?</string>
     <string name="add_location">ADD LOCATION</string>
     <string name="search_nearby">Search\nNearby</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="back_to_login">Back To Login</string>
+    <string name="create_a_new_account">Create a new account</string>
 </resources>

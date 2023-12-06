@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bg_cards"
+        android:background="@drawable/bg_button"
         android:paddingVertical="@dimen/dimen_4dp"
         android:paddingHorizontal="@dimen/dimen_8dp"
         android:layout_marginStart="@dimen/dimen_12dp"
