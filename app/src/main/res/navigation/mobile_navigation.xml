@@ -26,12 +26,12 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.portal.weatherapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" >
+        android:id="@+id/navigation_graph"
+        android:name="com.portal.weatherapp.ui.graph.GraphFragment"
+        android:label="@string/title_graph"
+        tools:layout="@layout/fragment_graph" >
         <action
-            android:id="@+id/action_navigation_notifications_to_loginFragment"
+            android:id="@+id/action_navigation_graph_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment

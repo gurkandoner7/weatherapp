@@ -1,6 +1,5 @@
 package com.portal.weatherapp.data.model
 
-import com.portal.weatherapp.R
 
 data class WeatherItem(
     val coord: CoordItem,
