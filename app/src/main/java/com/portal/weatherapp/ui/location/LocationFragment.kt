@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +18,6 @@ import com.portal.weatherapp.compose.viewBinding
 import com.portal.weatherapp.databinding.FragmentLocationBinding
 import com.portal.weatherapp.ui.location.adapter.LocationAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
@@ -65,7 +65,6 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
             val sharedPreferences =
                 requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             sharedPreferences.edit().putString("selectedCity", locationItem.cityName).apply()
-
             findNavController().navigate(
                 R.id.action_navigation_location_to_navigation_home,
             )

@@ -1,6 +1,7 @@
 package com.portal.weatherapp.ui.graph
 
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -44,6 +45,7 @@ class GraphFragment : BaseFragment(R.layout.fragment_graph) {
     }
 
     override fun initUI(savedInstanceState: Bundle?) {
+        requireActivity().onBackPressedDispatcher.addCallback {  }
         adapter = GraphAdapter(requireContext())
         binding.rvHourly.adapter = adapter
         setupLineChart()
@@ -76,6 +78,7 @@ class GraphFragment : BaseFragment(R.layout.fragment_graph) {
                                 binding.lineChart.xAxis
                             ) ?: ""
                         binding.tvSelectedDay.setText(selectedXValue)
+                        graphViewModel.generateMockList()
                     }
                 }
 

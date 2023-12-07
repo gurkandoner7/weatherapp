@@ -97,6 +97,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 .addOnCompleteListener { task: Task<AuthResult> ->
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_loginFragment_to_navigation_home)
+                        requireActivity().supportFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(
                             requireContext(),

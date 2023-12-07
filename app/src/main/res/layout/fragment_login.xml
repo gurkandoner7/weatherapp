@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_25dp"
-        android:background="@drawable/bg_cards"
+        android:background="@drawable/bg_google_button"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/dimen_10dp"

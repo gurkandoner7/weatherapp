@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 app:textType="Bold"
                 android:textAlignment="center"
-                android:layout_marginHorizontal="@dimen/dimen_18dp"
+                android:layout_marginHorizontal="@dimen/dimen_22dp"
                 tools:text="Humidity"
                 app:layout_constraintEnd_toEndOf="@id/clCardview"
                 app:layout_constraintStart_toStartOf="@id/clCardview"

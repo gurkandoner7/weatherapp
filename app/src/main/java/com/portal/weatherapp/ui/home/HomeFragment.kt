@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -78,6 +79,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     override fun initUI(savedInstanceState: Bundle?) {
+        requireActivity().onBackPressedDispatcher.addCallback {  }
 
         weatherAdapter = WeatherAdapter(requireContext())
         binding.rvWeather.adapter = weatherAdapter
