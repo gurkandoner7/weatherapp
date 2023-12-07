@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -107,8 +106,6 @@
         <item name="android:background">#FF8B7B9C</item>
     </style>
 
-
-
     <style name="ShapeAppearanceOverlay.App.CornerSize25Percent" parent="">
         <item name="cornerSize">25%</item>
     </style>
@@ -139,18 +136,6 @@
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:textColor">@color/transparent_background</item>
     </style>
-    <!-- TODO: Gerekli Drawable eklenince yorum satırı kaldırılacak.
-    <style name="DropdownAppearance" parent="">
-        <item name="endIconDrawable">@drawable/ic_dropdown_end_icon</item>
-        <item name="endIconMode">dropdown_menu</item>
-        <item name="endIconTint">@null</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/dimen_5dp</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/dimen_5dp</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/dimen_5dp</item>
-        <item name="boxCornerRadiusTopStart">@dimen/dimen_5dp</item>
-        <item name="boxStrokeWidth">@dimen/dimen_0dp</item>
-    </style>
-    -->
 
     <style name="CalendarPickerCell">
         <item name="android:layout_width">0dp</item>
@@ -189,28 +174,6 @@
         <item name="behavior_peekHeight">250dp</item>
     </style>
 
-    <!-- TODO: Gerekli Drawable eklenince yorum satırı kaldırılacak.
-    <style name="SortPopupMenu" parent="Widget.MaterialComponents.PopupMenu">
-        <item name="popupMenuStyle">@style/PopupMenu</item>
-        <item name="android:divider">@color/nav_unselected</item>
-        <item name="android:dividerHeight">@dimen/dimen_2dp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="fontFamily">@font/lato_semibold</item>
-        <item name="android:textSize">@dimen/ts_18sp</item>
-    </style>
-    -->
-    <!-- TODO: Gerekli Drawable eklenince yorum satırı kaldırılacak.
-    <style name="PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
-        <item name="android:popupBackground">@drawable/sort_menu_background</item>
-    </style>
-    -->
-    <style name="DeportakTextFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeWidth">@dimen/dimen_1dp</item>
-        <item name="boxCornerRadiusTopStart">@dimen/dimen_10dp</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/dimen_10dp</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/dimen_10dp</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/dimen_10dp</item>
-    </style>
 
     <style name="CustomHintText">
         <item name="android:textSize">@dimen/ts_16sp</item>
