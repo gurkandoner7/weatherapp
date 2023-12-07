@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
     private lateinit var weatherAdapter: WeatherAdapter
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
 
 
